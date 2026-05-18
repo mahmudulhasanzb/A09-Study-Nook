@@ -2,8 +2,12 @@ import { Button } from '@heroui/react';
 import { ArrowRight } from 'lucide-react';
 import FeaturedCard from './FeaturedCard';
 import Link from 'next/link';
+import { getFeaturedRooms } from '@/lib/data';
 
-const FeaturedRooms = () => {
+const FeaturedRooms = async () => {
+
+  const featuredRooms = await getFeaturedRooms()
+
   return (
     <section className="py-24 bg-slate-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -16,8 +20,7 @@ const FeaturedRooms = () => {
               Featured Rooms
             </h3>
             <p className="text-slate-500 max-w-xl">
-              Handpicked premium courses designed to help you master the most
-              in-demand skills in the industry today.
+              Discover our top-rated study spaces, perfect for solo focus or group collaboration.
             </p>
           </div>
           <Link href="/rooms">
@@ -33,7 +36,7 @@ const FeaturedRooms = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          <FeaturedCard/>
+          <FeaturedCard featuredRooms={featuredRooms} />
         </div>
       </div>
     </section>
