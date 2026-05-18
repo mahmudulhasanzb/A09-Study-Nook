@@ -57,14 +57,14 @@ export default function Navbar() {
 
   return (
     <div className="sticky top-4 z-50 w-full px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mb-8 transition-all duration-300">
-      <nav 
+      <nav
         className={`w-full rounded-2xl transition-all duration-300 ${
-          scrolled 
-            ? 'bg-white/95 backdrop-blur-xl border border-black/10 shadow-lg py-2' 
+          scrolled
+            ? 'bg-white/95 backdrop-blur-xl border border-black/10 shadow-lg py-2'
             : 'bg-white/80 backdrop-blur-md border border-black/5 shadow-sm py-3'
         }`}
       >
-        <div className="mx-auto flex items-center justify-between px-4 sm:px-6">
+        <div className="mx-auto flex items-center justify-between px-4  ">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 no-underline group">
             <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#b5622a] text-white shadow-md transition-transform duration-300 group-hover:scale-105 group-hover:shadow-lg">
@@ -122,15 +122,30 @@ export default function Navbar() {
                       strokeWidth={2}
                       className="h-4 w-4 text-[#1e1108]/50"
                     >
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M19 9l-7 7-7-7"
+                      />
                     </svg>
                   </button>
                 </DropdownTrigger>
-                <DropdownMenu aria-label="User actions" className="font-medium text-[#1e1108]">
-                  <DropdownItem key="listings" href="/my-listings" className="hover:text-[#b5622a]">
+                <DropdownMenu
+                  aria-label="User actions"
+                  className="font-medium text-[#1e1108]"
+                >
+                  <DropdownItem
+                    key="listings"
+                    href="/my-listings"
+                    className="hover:text-[#b5622a]"
+                  >
                     My Listings
                   </DropdownItem>
-                  <DropdownItem key="bookings" href="/my-bookings" className="hover:text-[#b5622a]">
+                  <DropdownItem
+                    key="bookings"
+                    href="/my-bookings"
+                    className="hover:text-[#b5622a]"
+                  >
                     My Bookings
                   </DropdownItem>
                   <DropdownItem
@@ -193,7 +208,9 @@ export default function Navbar() {
         {/* Mobile Menu */}
         <div
           className={`grid overflow-hidden transition-all duration-300 ease-in-out md:hidden ${
-            isOpen ? 'grid-rows-[1fr] opacity-100 mt-3' : 'grid-rows-[0fr] opacity-0 mt-0'
+            isOpen
+              ? 'grid-rows-[1fr] opacity-100 mt-3'
+              : 'grid-rows-[0fr] opacity-0 mt-0'
           }`}
         >
           <div className="min-h-0 border-t border-black/5 bg-white">
@@ -227,7 +244,7 @@ export default function Navbar() {
                   </>
                 )}
               </ul>
-              
+
               <div className="mt-4 border-t border-black/5 pt-4">
                 {user ? (
                   <div className="flex flex-col gap-4 px-2">
