@@ -1,6 +1,7 @@
 import { Button } from '@heroui/react';
 import { ArrowRight } from 'lucide-react';
 import FeaturedCard from './FeaturedCard';
+import Link from 'next/link';
 
 const FeaturedRooms = () => {
   return (
@@ -19,14 +20,16 @@ const FeaturedRooms = () => {
               in-demand skills in the industry today.
             </p>
           </div>
+          <Link href="/rooms">
           <Button
             variant="flat"
             color="primary"
-            className="rounded-full font-bold group"
+            className="rounded-full font-bold group hover:text-[#b5622a] transition-all duration-300 "
           >
             View All Rooms{' '}
             <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Button>
+          </Link>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
