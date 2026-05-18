@@ -12,10 +12,11 @@
 
 # testing
 /coverage
+/.agent
 
 # UI components
 /src/app/loading.js
-/src/app/not-found.js
+
 
 
 # next.js
