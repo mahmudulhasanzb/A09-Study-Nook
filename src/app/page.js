@@ -1,9 +1,14 @@
 import Link from "next/link";
 import Image from "next/image";
 import coverImg from "@/assets/study-nook-cover.png"
+import { getAllRooms } from "@/lib/data";
+import FeaturedRooms from "@/components/FeaturedRooms";
 
-export default function Home() {
+export default async function Home() {
+  const allRooms = await getAllRooms()
+  console.log(allRooms);
   return (
+    <>
     <div className="w-full flex flex-col gap-4 md:flex-row justify-between items-center">
 
       {/* left side */}
@@ -32,6 +37,9 @@ export default function Home() {
           className="w-full h-full rounded-lg"
         />
       </div>
-    </div>
+      </div>
+      
+      <FeaturedRooms/>
+    </>
   );
 }
