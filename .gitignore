@@ -12,11 +12,7 @@
 
 # testing
 /coverage
-/.agent
-
-# UI components
-/src/app/loading.js
-
+/.agent/
 
 
 # next.js
