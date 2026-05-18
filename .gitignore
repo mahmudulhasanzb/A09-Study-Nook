@@ -12,7 +12,6 @@
 
 # testing
 /coverage
-/.agent/
 
 
 # next.js
