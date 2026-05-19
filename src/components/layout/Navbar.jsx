@@ -38,9 +38,6 @@ export default function Navbar() {
   // get session from better-auth
   const { data: session, isPending } = authClient.useSession();
   const user = session?.user;
-  console.log('session', session);
-  console.log('user', user);
-  console.log("user Image: ", user?.image);
 
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -83,18 +80,18 @@ export default function Navbar() {
             <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#b5622a] text-white shadow-md transition-transform duration-300 group-hover:scale-105 group-hover:shadow-lg">
               <BookIcon />
             </span>
-            <span className="text-xl font-bold tracking-tight text-[#1e1108] transition-colors">
+            <span className="text-xl font-bold tracking-tight text-[#1e1108] transition-colors ">
               Study<span className="text-[#b5622a]">Nook</span>
             </span>
           </Link>
 
           {/* Desktop Nav Links */}
-          <ul className="hidden items-center gap-1.5 md:flex">
+          <ul className="hidden items-center gap-1.5 lg:flex">
             {navLinks.map(({ label, href }) => (
               <li key={href}>
                 <Link
                   href={href}
-                  className="rounded-full px-4 py-2 text-sm font-semibold text-[#1e1108]/70 transition-all duration-200 hover:bg-[#b5622a]/10 hover:text-[#b5622a] no-underline"
+                  className="rounded-full px-4 py-2 text-sm font-semibold text-[#1e1108]/70 transition-all duration-200 hover:bg-[#b5622a]/10 hover:text-[#b5622a] no-underline whitespace-nowrap"
                 >
                   {label}
                 </Link>
@@ -105,7 +102,7 @@ export default function Navbar() {
                 <li key={href}>
                   <Link
                     href={href}
-                    className="rounded-full px-4 py-2 text-sm font-semibold text-[#1e1108]/70 transition-all duration-200 hover:bg-[#b5622a]/10 hover:text-[#b5622a] no-underline"
+                    className="rounded-full px-4 py-2 text-sm font-semibold text-[#1e1108]/70 transition-all duration-200 hover:bg-[#b5622a]/10 hover:text-[#b5622a] no-underline whitespace-nowrap"
                   >
                     {label}
                   </Link>
@@ -114,7 +111,7 @@ export default function Navbar() {
           </ul>
 
           {/* Desktop Right */}
-          <div className="hidden items-center gap-3 md:flex">
+          <div className="hidden items-center gap-3 lg:flex">
             {user ? (
               <div className="relative">
                 <button
@@ -162,7 +159,7 @@ export default function Navbar() {
                       <Link
                         href="/my-listings"
                         onClick={() => setShowDropdown(false)}
-                        className="block rounded-lg px-3 py-2 text-sm font-semibold text-[#1e1108]/85 hover:bg-[#b5622a]/10 hover:text-[#b5622a] no-underline"
+                        className="block rounded-lg px-3 py-2 text-sm font-semibold text-[#1e1108]/85 hover:bg-[#b5622a]/10 hover:text-[#b5622a] no-underline "
                       >
                         My Listings
                       </Link>
@@ -208,7 +205,7 @@ export default function Navbar() {
 
           {/* Mobile Hamburger */}
           <button
-            className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full text-[#1e1108] transition-colors hover:bg-black/5 md:hidden"
+            className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full text-[#1e1108] transition-colors hover:bg-black/5 lg:hidden"
             onClick={() => setIsOpen(!isOpen)}
             aria-label="Toggle navigation menu"
             aria-expanded={isOpen}
@@ -237,7 +234,7 @@ export default function Navbar() {
 
         {/* Mobile Menu */}
         <div
-          className={`grid overflow-hidden transition-all duration-300 ease-in-out md:hidden ${
+          className={`grid overflow-hidden transition-all duration-300 ease-in-out lg:hidden ${
             isOpen
               ? 'grid-rows-[1fr] opacity-100 mt-3'
               : 'grid-rows-[0fr] opacity-0 mt-0'
