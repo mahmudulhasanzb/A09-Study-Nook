@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { Button, Input } from '@heroui/react';
 import { authClient } from '@/lib/auth-client';
 import { useRouter } from 'next/navigation';
+import toast from 'react-hot-toast';
 
 const LoginPage = () => {
   const router = useRouter();
@@ -13,16 +14,34 @@ const LoginPage = () => {
     const formData = new FormData(e.currentTarget);
     const { email, password } = Object.fromEntries(formData.entries());
 
-    const { data, error } = await authClient.signIn.email({
-      email,
-      password,
+    await authClient.signIn.email(
+      {
+        email,
+        password,
+      },
+      {
+        onSuccess: () => {
+          toast.success("Login successfully");
+          router.push('/');
+        },
+        onError: (ctx) => {
+          toast.error(ctx.error.message);
+        },
+      }
+    );
+  };
+
+  const handleGoogleSignIn = async () => {
+    await authClient.signIn.social({
+      provider: 'google',
+      callbackURL: '/',
+      onSuccess: () => {
+        toast.success("Login successfully");
+      },
+      onError: (ctx) => {
+        toast.error(ctx.error.message);
+      },
     });
-
-    if (!error) {
-      router.push('/');
-    }
-
-    console.log({ data, error });
   };
 
   return (
@@ -86,19 +105,71 @@ const LoginPage = () => {
                 Sign In{' '}
                 <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
               </Button>
-            </form>
 
-            <div className="text-center pt-2">
-              <p className="text-sm text-slate-500 font-medium">
-                Don't have an account?{' '}
-                <Link
-                  href="/signup"
-                  className="text-[#b5622a] hover:text-[#a15323] font-black hover:underline underline-offset-4 transition-all"
+              <div className="relative">
+                <div className="absolute inset-0 flex items-center">
+                  <div className="w-full border-t border-slate-200"></div>
+                </div>
+                <div className="relative flex justify-center text-sm">
+                  <span className="bg-white px-2 text-slate-500">
+                    Or continue with
+                  </span>
+                </div>
+              </div>
+
+              <Button
+                onClick={handleGoogleSignIn}
+                type="button"
+                color="primary"
+                className="bg-white hover:bg-[#f1f5f9] text-[#b5622a] border-2 border-[#5c5654] w-full h-14 text-lg font-black rounded-2xl shadow-lg hover:shadow-[#b5622a]/10 transition-all duration-300 group"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 48 48"
+                  width="48"
+                  height="48"
                 >
-                  Sign up
-                </Link>
-              </p>
-            </div>
+                  <path
+                    fill="#FFC107"
+                    d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.3 36 24 36c-6.6 0-12-5.4-12-12
+       s5.4-12 12-12c3 0 5.7 1.1 7.8 2.9l5.7-5.7C34.1 6.1 29.3 4 24 4
+       12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.7-.4-3.5z"
+                  />
+                  <path
+                    fill="#FF3D00"
+                    d="M6.3 14.7l6.6 4.8C14.7 15.1 18.9 12 24 12
+       c3 0 5.7 1.1 7.8 2.9l5.7-5.7C34.1 6.1 29.3 4 24 4
+       16.3 4 9.7 8.3 6.3 14.7z"
+                  />
+                  <path
+                    fill="#4CAF50"
+                    d="M24 44c5.2 0 10-2 13.5-5.2l-6.2-5.2
+       C29.2 35.1 26.7 36 24 36
+       c-5.3 0-9.7-3.3-11.3-8l-6.5 5
+       C9.5 39.5 16.2 44 24 44z"
+                  />
+                  <path
+                    fill="#1976D2"
+                    d="M43.6 20.5H42V20H24v8h11.3
+       c-1.1 3-3.3 5.3-6.2 6.8l6.2 5.2
+       C39.9 36.3 44 30.8 44 24
+       c0-1.3-.1-2.7-.4-3.5z"
+                  />
+                </svg>
+                Continue with Google
+              </Button>
+            </form>
+          </div>
+          <div className="text-center mt-6">
+            <p className="text-sm text-[#5c5654] font-medium">
+              Don't have an account?{' '}
+              <Link
+                href="/signup"
+                className="text-[#b5622a] hover:text-[#a15323] text-lg font-bold hover:underline transition-all"
+              >
+                Sign up
+              </Link>
+            </p>
           </div>
         </div>
       </div>

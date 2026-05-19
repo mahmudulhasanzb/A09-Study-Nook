@@ -1,15 +1,13 @@
 'use client';
 import { useState, useEffect } from 'react';
-import {
-  Button,
-  Avatar,
-} from '@heroui/react';
+import { Button } from '@heroui/react';
 import Link from 'next/link';
 import { authClient } from '@/lib/auth-client';
 import { useRouter } from 'next/navigation';
+import toast from 'react-hot-toast';
 
 const BookIcon = () => (
-  < svg
+  <svg
     viewBox="0 0 24 24"
     fill="none"
     stroke="currentColor"
@@ -42,6 +40,7 @@ export default function Navbar() {
   const user = session?.user;
   console.log('session', session);
   console.log('user', user);
+  console.log("user Image: ", user?.image);
 
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -51,7 +50,11 @@ export default function Navbar() {
     await authClient.signOut({
       fetchOptions: {
         onSuccess: () => {
+          toast.success('Logged out successfully');
           router.push('/login');
+        },
+        onError: error => {
+          toast.error(error.message);
         },
       },
     });
@@ -66,7 +69,7 @@ export default function Navbar() {
   }, []);
 
   return (
-    < div className="sticky top-4 z-50 w-full px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mb-8 transition-all duration-300">
+    <div className="sticky top-4 z-50 w-full px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mb-8 transition-all duration-300">
       <nav
         className={`w-full rounded-2xl transition-all duration-300 ${
           scrolled
@@ -118,14 +121,19 @@ export default function Navbar() {
                   onClick={() => setShowDropdown(!showDropdown)}
                   className="flex cursor-pointer items-center gap-2.5 rounded-full border border-black/10 bg-white p-1 pr-3 transition-all duration-200 hover:border-[#b5622a]/30 hover:bg-[#b5622a]/5 hover:shadow-sm"
                 >
-                  <Avatar
-                    src={user.photoURL}
-                    name={user.name}
-                    size="sm"
-                    className="h-8 w-8"
-                  />
+                  {user?.image ? (
+                    <img
+                      src={user.image}
+                      alt={user.name || 'User'}
+                      className="h-8 w-8 rounded-full object-cover"
+                    />
+                  ) : (
+                    <div className="h-8 w-8 rounded-full bg-[#b5622a]/10 text-[#b5622a] flex items-center justify-center font-bold text-xs">
+                      {user?.name ? user.name[0].toUpperCase() : 'U'}
+                    </div>
+                  )}
                   <span className="max-w-[100px] truncate text-sm font-semibold text-[#1e1108]">
-                    {user.name}
+                    {user?.name}
                   </span>
                   <svg
                     viewBox="0 0 24 24"
@@ -182,7 +190,10 @@ export default function Navbar() {
             ) : (
               <div className="flex items-center gap-2">
                 <Link href="/login">
-                  <Button className="rounded-full px-5 py-2.5 text-sm font-bold text-[#1e1108] transition-all duration-200 hover:bg-black/5 no-underline">
+                  <Button
+                    variant="flat"
+                    className="rounded-full px-5 py-2.5 text-sm font-bold transition-all duration-200 no-underline bg-black/5 text-[#1e1108] hover:bg-black/10"
+                  >
                     Login
                   </Button>
                 </Link>
@@ -268,12 +279,17 @@ export default function Navbar() {
                 {user ? (
                   <div className="flex flex-col gap-4 px-2">
                     <div className="flex items-center gap-3">
-                      <Avatar
-                        src={user.photoURL}
-                        name={user.name}
-                        size="md"
-                        className="h-10 w-10 border border-black/10"
-                      />
+                      {user?.image ? (
+                        <img
+                          src={user.image}
+                          alt={user.name || 'User'}
+                          className="h-10 w-10 rounded-full object-cover border border-black/10"
+                        />
+                      ) : (
+                        <div className="h-10 w-10 rounded-full bg-[#b5622a]/10 text-[#b5622a] flex items-center justify-center font-bold text-sm border border-black/10">
+                          {user?.name ? user.name[0].toUpperCase() : 'U'}
+                        </div>
+                      )}
                       <div>
                         <span className="block text-sm font-bold text-[#1e1108]">
                           {user.name}
