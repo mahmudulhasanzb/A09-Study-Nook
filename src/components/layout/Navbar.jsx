@@ -3,21 +3,13 @@ import { useState, useEffect } from 'react';
 import {
   Button,
   Avatar,
-  Dropdown,
-  DropdownTrigger,
-  DropdownMenu,
-  DropdownItem,
 } from '@heroui/react';
 import Link from 'next/link';
-
-// Replace with real auth context
-const useAuth = () => ({
-  user: null, // { name: 'Alice', photoURL: 'https://...' }
-  logout: () => {},
-});
+import { authClient } from '@/lib/auth-client';
+import { useRouter } from 'next/navigation';
 
 const BookIcon = () => (
-  <svg
+  < svg
     viewBox="0 0 24 24"
     fill="none"
     stroke="currentColor"
@@ -43,9 +35,27 @@ const privateLinks = [
 ];
 
 export default function Navbar() {
+  const router = useRouter();
+
+  // get session from better-auth
+  const { data: session, isPending } = authClient.useSession();
+  const user = session?.user;
+  console.log('session', session);
+  console.log('user', user);
+
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const { user, logout } = useAuth();
+  const [showDropdown, setShowDropdown] = useState(false);
+
+  const handleLogout = async () => {
+    await authClient.signOut({
+      fetchOptions: {
+        onSuccess: () => {
+          router.push('/login');
+        },
+      },
+    });
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -56,7 +66,7 @@ export default function Navbar() {
   }, []);
 
   return (
-    <div className="sticky top-4 z-50 w-full px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mb-8 transition-all duration-300">
+    < div className="sticky top-4 z-50 w-full px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mb-8 transition-all duration-300">
       <nav
         className={`w-full rounded-2xl transition-all duration-300 ${
           scrolled
@@ -103,61 +113,72 @@ export default function Navbar() {
           {/* Desktop Right */}
           <div className="hidden items-center gap-3 md:flex">
             {user ? (
-              <Dropdown placement="bottom-end">
-                <DropdownTrigger>
-                  <button className="flex cursor-pointer items-center gap-2.5 rounded-full border border-black/10 bg-white p-1 pr-3 transition-all duration-200 hover:border-[#b5622a]/30 hover:bg-[#b5622a]/5 hover:shadow-sm">
-                    <Avatar
-                      src={user.photoURL}
-                      name={user.name}
-                      size="sm"
-                      className="h-8 w-8"
-                    />
-                    <span className="max-w-[100px] truncate text-sm font-semibold text-[#1e1108]">
-                      {user.name}
-                    </span>
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth={2}
-                      className="h-4 w-4 text-[#1e1108]/50"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M19 9l-7 7-7-7"
-                      />
-                    </svg>
-                  </button>
-                </DropdownTrigger>
-                <DropdownMenu
-                  aria-label="User actions"
-                  className="font-medium text-[#1e1108]"
+              <div className="relative">
+                <button
+                  onClick={() => setShowDropdown(!showDropdown)}
+                  className="flex cursor-pointer items-center gap-2.5 rounded-full border border-black/10 bg-white p-1 pr-3 transition-all duration-200 hover:border-[#b5622a]/30 hover:bg-[#b5622a]/5 hover:shadow-sm"
                 >
-                  <DropdownItem
-                    key="listings"
-                    href="/my-listings"
-                    className="hover:text-[#b5622a]"
+                  <Avatar
+                    src={user.photoURL}
+                    name={user.name}
+                    size="sm"
+                    className="h-8 w-8"
+                  />
+                  <span className="max-w-[100px] truncate text-sm font-semibold text-[#1e1108]">
+                    {user.name}
+                  </span>
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                    className={`h-4 w-4 text-[#1e1108]/50 transition-transform duration-200 ${
+                      showDropdown ? 'rotate-180' : ''
+                    }`}
                   >
-                    My Listings
-                  </DropdownItem>
-                  <DropdownItem
-                    key="bookings"
-                    href="/my-bookings"
-                    className="hover:text-[#b5622a]"
-                  >
-                    My Bookings
-                  </DropdownItem>
-                  <DropdownItem
-                    key="logout"
-                    color="danger"
-                    className="text-red-500 hover:bg-red-50"
-                    onPress={logout}
-                  >
-                    Logout
-                  </DropdownItem>
-                </DropdownMenu>
-              </Dropdown>
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </button>
+
+                {showDropdown && (
+                  <>
+                    <div
+                      className="fixed inset-0 z-30"
+                      onClick={() => setShowDropdown(false)}
+                    />
+                    <div className="absolute right-0 mt-2 w-48 rounded-xl border border-black/5 bg-white p-1.5 shadow-lg ring-1 ring-black/5 z-40 transition-all duration-200">
+                      <Link
+                        href="/my-listings"
+                        onClick={() => setShowDropdown(false)}
+                        className="block rounded-lg px-3 py-2 text-sm font-semibold text-[#1e1108]/85 hover:bg-[#b5622a]/10 hover:text-[#b5622a] no-underline"
+                      >
+                        My Listings
+                      </Link>
+                      <Link
+                        href="/my-bookings"
+                        onClick={() => setShowDropdown(false)}
+                        className="block rounded-lg px-3 py-2 text-sm font-semibold text-[#1e1108]/85 hover:bg-[#b5622a]/10 hover:text-[#b5622a] no-underline"
+                      >
+                        My Bookings
+                      </Link>
+                      <hr className="my-1.5 border-black/5" />
+                      <button
+                        onClick={() => {
+                          setShowDropdown(false);
+                          handleLogout();
+                        }}
+                        className="w-full text-left block rounded-lg px-3 py-2 text-sm font-bold text-red-600 hover:bg-red-50 cursor-pointer"
+                      >
+                        Logout
+                      </button>
+                    </div>
+                  </>
+                )}
+              </div>
             ) : (
               <div className="flex items-center gap-2">
                 <Link href="/login">
@@ -267,7 +288,7 @@ export default function Navbar() {
                       color="danger"
                       className="w-full font-bold bg-red-50 text-red-600 border border-red-100 hover:bg-red-100"
                       onPress={() => {
-                        logout();
+                        handleLogout();
                         setIsOpen(false);
                       }}
                     >
@@ -277,9 +298,9 @@ export default function Navbar() {
                 ) : (
                   <div className="flex flex-col gap-3 px-2">
                     <Link href="/login">
-                        <Button
-                      variant="flat"
-                          size="md"
+                      <Button
+                        variant="flat"
+                        size="md"
                         className="w-full font-bold bg-black/5 text-[#1e1108] hover:bg-black/10"
                         onClick={() => setIsOpen(false)}
                       >
