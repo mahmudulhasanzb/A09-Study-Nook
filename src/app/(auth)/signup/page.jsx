@@ -10,6 +10,7 @@ import toast from 'react-hot-toast';
 
 const SignUpPage = () => {
   const router = useRouter();
+  const [errorMsg, setErrorMsg] = React.useState('');
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -17,6 +18,21 @@ const SignUpPage = () => {
     const signUpData = Object.fromEntries(formData.entries());
 
     const { name, email, password, image } = signUpData;
+
+    // Password validation
+    if (password.length < 6) {
+      setErrorMsg('Password must be at least 6 characters.');
+      return;
+    }
+    if (!/[A-Z]/.test(password)) {
+      setErrorMsg('Password must contain at least one uppercase letter.');
+      return;
+    }
+    if (!/[a-z]/.test(password)) {
+      setErrorMsg('Password must contain at least one lowercase letter.');
+      return;
+    }
+    setErrorMsg('');
 
     await authClient.signUp.email(
       {
@@ -111,6 +127,7 @@ const SignUpPage = () => {
                 </label>
                 <Input
                   id="image"
+                  required
                   placeholder="https://images.unsplash.com/..."
                   type="url"
                   name="image"
@@ -135,6 +152,11 @@ const SignUpPage = () => {
                   startContent={<Lock className="w-5 h-5 text-slate-400" />}
                   className="border-2 border-[#5c5654] hover:border-[#b5622a]/50 focus-within:border-[#b5622a] transition-all duration-300 h-14 bg-white w-full rounded-2xl"
                 />
+                {errorMsg && (
+                  <p className="text-red-500 text-xs font-bold mt-1 ml-1">
+                    {errorMsg}
+                  </p>
+                )}
               </div>
 
               <Button
