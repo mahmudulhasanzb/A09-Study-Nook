@@ -1,7 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
 import {
-  Link,
   Button,
   Avatar,
   Dropdown,
@@ -9,6 +8,7 @@ import {
   DropdownMenu,
   DropdownItem,
 } from '@heroui/react';
+import Link from 'next/link';
 
 // Replace with real auth context
 const useAuth = () => ({
@@ -160,17 +160,15 @@ export default function Navbar() {
               </Dropdown>
             ) : (
               <div className="flex items-center gap-2">
-                <Link
-                  href="/login"
-                  className="rounded-full px-5 py-2.5 text-sm font-bold text-[#1e1108] transition-all duration-200 hover:bg-black/5 no-underline"
-                >
-                  Login
+                <Link href="/login">
+                  <Button className="rounded-full px-5 py-2.5 text-sm font-bold text-[#1e1108] transition-all duration-200 hover:bg-black/5 no-underline">
+                    Login
+                  </Button>
                 </Link>
-                <Link
-                  href="/register"
-                  className="rounded-full bg-[#1e1108] px-6 py-2.5 text-sm font-bold text-white shadow-md transition-all duration-200 hover:-translate-y-0.5 hover:bg-black hover:shadow-lg no-underline"
-                >
-                  Sign Up
+                <Link href="/signup">
+                  <Button className="rounded-full bg-[#1e1108] px-6 py-2.5 text-sm font-bold text-white shadow-md transition-all duration-200 hover:-translate-y-0.5 hover:bg-black hover:shadow-lg no-underline">
+                    Sign Up
+                  </Button>
                 </Link>
               </div>
             )}
@@ -278,25 +276,25 @@ export default function Navbar() {
                   </div>
                 ) : (
                   <div className="flex flex-col gap-3 px-2">
-                    <Button
-                      as={Link}
-                      href="/login"
+                    <Link href="/login">
+                        <Button
                       variant="flat"
-                      size="md"
-                      className="w-full font-bold bg-black/5 text-[#1e1108] hover:bg-black/10"
-                      onClick={() => setIsOpen(false)}
-                    >
-                      Login
-                    </Button>
-                    <Button
-                      as={Link}
-                      href="/register"
-                      size="md"
-                      className="w-full bg-[#1e1108] font-bold text-white hover:bg-black shadow-md"
-                      onClick={() => setIsOpen(false)}
-                    >
-                      Sign Up
-                    </Button>
+                          size="md"
+                        className="w-full font-bold bg-black/5 text-[#1e1108] hover:bg-black/10"
+                        onClick={() => setIsOpen(false)}
+                      >
+                        Login
+                      </Button>
+                    </Link>
+                    <Link href="/signup">
+                      <Button
+                        size="md"
+                        className="w-full bg-[#1e1108] font-bold text-white hover:bg-black shadow-md"
+                        onClick={() => setIsOpen(false)}
+                      >
+                        Sign Up
+                      </Button>
+                    </Link>
                   </div>
                 )}
               </div>
