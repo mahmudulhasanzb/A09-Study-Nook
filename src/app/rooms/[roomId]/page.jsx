@@ -1,6 +1,6 @@
 import BookingModal from '@/components/BookingModal';
 import { getRoomById } from '@/lib/data';
-import { ArrowLeft, Layers, Users, DollarSign, Calendar } from 'lucide-react';
+import { ArrowLeft, Layers, Users, DollarSign } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
@@ -144,10 +144,10 @@ const RoomDetailsPage = async ({ params }) => {
               </div>
             </div>
 
-            <Button className="w-full bg-[#b5622a] hover:bg-[#a15323] text-white font-bold py-6 rounded-xl flex items-center justify-center gap-2 text-md transition-all duration-300 active:scale-[0.98] border-none shadow-md shadow-orange-500/10 cursor-pointer">
-              <Calendar className="w-5 h-5" />
-              Book Now
-            </Button>
+ 
+              
+              <BookingModal name={name} />
+
           </div>
 
           {/* Owner Card */}
@@ -171,10 +171,10 @@ const RoomDetailsPage = async ({ params }) => {
               )}
               <div className="min-w-0">
                 <p className="font-bold text-[#1e1108] text-md truncate leading-snug">
-                  {ownerName || 'Owner Name'}
+                  {ownerName || "Owner Name"}
                 </p>
                 <p className="text-sm text-slate-400 truncate leading-snug mt-0.5">
-                  {ownerEmail || 'owner@gmail.com'}
+                  {ownerEmail || "owner@gmail.com"}
                 </p>
               </div>
             </div>
