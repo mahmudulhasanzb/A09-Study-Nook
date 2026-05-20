@@ -9,3 +9,9 @@ export const getAllRooms = async () => {
   const data = await res.json();
   return data;
 };
+
+export const getRoomById = async roomId => {
+  const res = await fetch(`http://localhost:8000/rooms/${roomId}`);
+  const data = await res.json();
+  return data;
+};

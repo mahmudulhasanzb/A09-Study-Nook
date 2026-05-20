@@ -50,7 +50,7 @@ const AllRoomsPage = async () => {
               </p>
             </div>
 
-            <Link href="/rooms/id" className="w-full block">
+            < Link href={`/rooms/${room._id}`} className="w-full block">
               <Button className="w-full bg-[#b5622a] hover:bg-[#a15323] text-white border border-[#b5622a] py-3 rounded-xl font-semibold transition-all cursor-pointer duration-300 hover:scale-101">
                 View Details
               </Button>
