@@ -186,7 +186,7 @@ const MyListingsPage = () => {
                     {room.name}
                   </h3>
                   <span className="text-lg font-extrabold text-[#b5622a] shrink-0">
-                    ${room.hourlyRate}/hr
+                    ${room.hourlyRate}
                   </span>
                 </div>
 

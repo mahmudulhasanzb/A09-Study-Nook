@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import coverImg from '@/assets/study-nook-cover.png';
 import FeaturedRooms from '@/components/FeaturedRooms';
-import { ArrowRight, BookOpen, Star, Users } from 'lucide-react';
+import { ArrowRight, BookOpen, Star, Users, Zap } from 'lucide-react';
 
 export const metadata = {
   title: 'StudyNook – Home',
@@ -102,52 +102,80 @@ export default async function Home() {
                   </span>
                 </div>
               </div>
-            </div>
-
+            </div>{' '}
             {/* Right Image/Visuals */}
-            <div className="relative lg:ml-auto mt-10 lg:mt-0 w-full max-w-lg mx-auto lg:max-w-none">
-              {/* Main Image Card */}
-              <div className="relative z-10 rounded-2xl overflow-hidden shadow-2xl shadow-gray-200/50 border border-gray-100 transform transition-transform hover:-translate-y-2 duration-500 bg-white">
-                <Image
-                  src={coverImg}
-                  alt="Students studying in a bright, modern room"
-                  width={600}
-                  height={600}
-                  className="w-full h-auto object-cover aspect-[4/3] sm:aspect-auto"
-                  priority
-                />
+            <div className="relative lg:ml-auto mt-10 lg:mt-0 w-full max-w-lg mx-auto lg:max-w-none flex justify-center items-center">
+              {/* Backglow decoration */}
+              <div
+                className="absolute -inset-10 bg-gradient-to-tr from-[#b5622a]/20 via-[#b5622a]/5 to-transparent rounded-full blur-3xl opacity-75 dark:opacity-40 -z-10 animate-pulse"
+                style={{ animationDuration: '8s' }}
+              ></div>
 
-                {/* Overlay Gradient */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
+              {/* Decorative skew border stack */}
+              <div className="absolute inset-0 border-2 border-dashed border-[#b5622a]/25 dark:border-[#b5622a]/15 rounded-3xl transform rotate-3 scale-102 -z-10"></div>
+              <div className="absolute inset-0 bg-[#b5622a]/5 dark:bg-[#b5622a]/2 rounded-3xl transform -rotate-2 -z-10"></div>
+
+              {/* Main Image Card with modern Glassmorphic frame */}
+              <div className="relative z-10 p-3 rounded-3xl bg-white/40 dark:bg-slate-900/40 backdrop-blur-md border border-white/20 dark:border-slate-800/40 shadow-2xl shadow-[#b5622a]/10 transform transition-all hover:scale-[1.02] hover:-rotate-1 duration-500">
+                <div className="relative rounded-2xl overflow-hidden aspect-[4/3] md:aspect-square lg:aspect-[4/3]">
+                  <Image
+                    src={coverImg}
+                    alt="Students studying in a bright, modern room"
+                    width={600}
+                    height={600}
+                    className="w-full h-full object-cover"
+                    priority
+                  />
+                  {/* Subtle inner overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+
+                  {/* Soft light sweep overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full hover:translate-x-full transition-transform duration-1000"></div>
+                </div>
               </div>
 
-              {/* Floating Stat Card 1 */}
+              {/* Floating Stat Card 1: Active Rooms */}
               <div
-                className="absolute -bottom-6 sm:-bottom-8 -left-2 sm:-left-8 z-20 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md p-4 rounded-xl shadow-xl shadow-gray-200/50 dark:shadow-none border border-white dark:border-slate-800 flex items-center gap-4 animate-bounce"
-                style={{ animationDuration: '3s' }}
+                className="absolute -bottom-6 -left-6 z-20 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md p-4 rounded-2xl shadow-xl shadow-[#b5622a]/10 border border-slate-100 dark:border-slate-800 flex items-center gap-3.5 hover:scale-105 transition-transform duration-300 animate-bounce"
+                style={{ animationDuration: '4s' }}
               >
-                <div className="w-12 h-12 rounded-full bg-orange-100 dark:bg-orange-950/40 flex items-center justify-center text-[#b5622a]">
-                  <BookOpen className="w-6 h-6" />
+                <div className="w-11 h-11 rounded-xl bg-orange-50 dark:bg-[#b5622a]/10 flex items-center justify-center text-[#b5622a] shadow-inner">
+                  <BookOpen className="w-5.5 h-5.5" />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-gray-900 dark:text-white">500+</p>
-                  <p className="text-xs font-medium text-[#5c5654] dark:text-slate-400 uppercase tracking-wider">
+                  <p className="text-xl font-black text-slate-800 dark:text-white leading-none">
+                    500+
+                  </p>
+                  <p className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mt-1">
                     Active Rooms
                   </p>
                 </div>
               </div>
 
-              {/* Floating Stat Card 2 */}
-              <div className="absolute -top-6 -right-6 z-20 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md p-4 rounded-xl shadow-xl shadow-gray-200/50 dark:shadow-none border border-white dark:border-slate-800 flex items-center gap-4 hidden sm:flex transform translate-y-4 hover:translate-y-0 transition-transform duration-300">
-                <div className="w-12 h-12 rounded-full bg-blue-50 dark:bg-blue-950/40 flex items-center justify-center text-blue-600">
-                  <Users className="w-6 h-6" />
+              {/* Floating Stat Card 2: Instant Booking */}
+              <div className="absolute -top-6 -right-6 z-20 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md p-4 rounded-2xl shadow-xl shadow-[#b5622a]/10 border border-slate-100 dark:border-slate-800 flex items-center gap-3.5 hover:scale-105 transition-transform duration-300">
+                <div className="w-11 h-11 rounded-xl bg-amber-50 dark:bg-amber-950/20 flex items-center justify-center text-amber-600 shadow-inner">
+                  <Zap className="w-5.5 h-5.5 fill-amber-500/20" />
                 </div>
                 <div>
-                  <p className="text-xl font-bold text-gray-900 dark:text-white">10k+</p>
-                  <p className="text-xs font-medium text-[#5c5654] dark:text-slate-400 uppercase tracking-wider">
-                    Happy Users
+                  <p className="text-lg font-black text-slate-800 dark:text-white leading-none">
+                    Instant
+                  </p>
+                  <p className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mt-1">
+                    Confirmation
                   </p>
                 </div>
+              </div>
+
+              {/* Floating Badge 3: Live pulsating count */}
+              <div className="absolute top-1/2 -right-10 z-20 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md px-3.5 py-2.5 rounded-full shadow-lg shadow-[#b5622a]/5 border border-slate-100 dark:border-slate-800 flex items-center gap-2 hover:scale-105 transition-transform duration-300 hidden xl:flex">
+                <span className="relative flex h-2.5 w-2.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+                </span>
+                <span className="text-[11px] font-black text-slate-700 dark:text-slate-300 tracking-wider">
+                  42 Available Now
+                </span>
               </div>
             </div>
           </div>
@@ -167,7 +195,8 @@ export default async function Home() {
               How StudyNook Works
             </h3>
             <p className="text-slate-500 dark:text-slate-400 text-lg">
-              Get your perfect study environment ready in just three quick steps.
+              Get your perfect study environment ready in just three quick
+              steps.
             </p>
           </div>
 
@@ -192,15 +221,22 @@ export default async function Home() {
                 icon: '✍️',
               },
             ].map((item, index) => (
-              <div key={index} className="relative p-8 rounded-3xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 hover:shadow-xl transition duration-300 group">
+              <div
+                key={index}
+                className="relative p-8 rounded-3xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 hover:shadow-xl transition duration-300 group"
+              >
                 <div className="absolute top-6 right-8 text-5xl font-black text-slate-200/50 dark:text-slate-800 group-hover:text-[#b5622a]/10 transition-colors">
                   {item.step}
                 </div>
                 <div className="w-14 h-14 rounded-2xl bg-orange-100 dark:bg-orange-955/40 flex items-center justify-center text-3xl mb-6">
                   {item.icon}
                 </div>
-                <h4 className="text-xl font-bold text-slate-900 dark:text-white mb-3">{item.title}</h4>
-                <p className="text-slate-500 dark:text-slate-400 leading-relaxed">{item.desc}</p>
+                <h4 className="text-xl font-bold text-slate-900 dark:text-white mb-3">
+                  {item.title}
+                </h4>
+                <p className="text-slate-500 dark:text-slate-400 leading-relaxed">
+                  {item.desc}
+                </p>
               </div>
             ))}
           </div>
@@ -218,7 +254,8 @@ export default async function Home() {
               Hear From Our Students
             </h3>
             <p className="text-slate-500 dark:text-slate-400 text-lg">
-              Discover how StudyNook is helping student groups focus and score higher.
+              Discover how StudyNook is helping student groups focus and score
+              higher.
             </p>
           </div>
 
@@ -227,39 +264,55 @@ export default async function Home() {
               {
                 name: 'Sarah Jenkins',
                 role: 'Computer Science Major',
-                quote: 'Finding private rooms for group projects used to be a nightmare during finals. StudyNook makes booking quick and reliable.',
+                quote:
+                  'Finding private rooms for group projects used to be a nightmare during finals. StudyNook makes booking quick and reliable.',
                 rating: 5,
-                img: 'https://i.pravatar.cc/100?img=33'
+                img: 'https://i.pravatar.cc/100?img=33',
               },
               {
                 name: 'Marcus Vance',
                 role: 'Pre-Med Student',
-                quote: 'I list my private library desk whenever I am attending lectures. It helps other students find a spot and pays for my coffee!',
+                quote:
+                  'I list my private library desk whenever I am attending lectures. It helps other students find a spot and pays for my coffee!',
                 rating: 5,
-                img: 'https://i.pravatar.cc/100?img=12'
+                img: 'https://i.pravatar.cc/100?img=12',
               },
               {
                 name: 'Elena Rostova',
                 role: 'Graduate Researcher',
-                quote: 'The amenities filter is amazing. I can guarantee I get a room with a monitor and ethernet whenever I need to compile data.',
+                quote:
+                  'The amenities filter is amazing. I can guarantee I get a room with a monitor and ethernet whenever I need to compile data.',
                 rating: 5,
-                img: 'https://i.pravatar.cc/100?img=47'
-              }
+                img: 'https://i.pravatar.cc/100?img=47',
+              },
             ].map((test, index) => (
-              <div key={index} className="bg-white dark:bg-slate-900 p-8 rounded-3xl border border-slate-100 dark:border-slate-800 hover:shadow-xl transition duration-300 flex flex-col justify-between">
+              <div
+                key={index}
+                className="bg-white dark:bg-slate-900 p-8 rounded-3xl border border-slate-100 dark:border-slate-800 hover:shadow-xl transition duration-300 flex flex-col justify-between"
+              >
                 <div className="space-y-4">
                   <div className="flex text-yellow-500 gap-1">
                     {Array.from({ length: test.rating }).map((_, i) => (
                       <Star key={i} className="w-4 h-4 fill-current" />
                     ))}
                   </div>
-                  <p className="text-slate-600 dark:text-slate-350 italic">"{test.quote}"</p>
+                  <p className="text-slate-600 dark:text-slate-350 italic">
+                    "{test.quote}"
+                  </p>
                 </div>
                 <div className="flex items-center gap-4 mt-8 pt-6 border-t border-slate-100 dark:border-slate-800">
-                  <img src={test.img} alt={test.name} className="w-12 h-12 rounded-full object-cover" />
+                  <img
+                    src={test.img}
+                    alt={test.name}
+                    className="w-12 h-12 rounded-full object-cover"
+                  />
                   <div>
-                    <h5 className="font-bold text-slate-900 dark:text-white">{test.name}</h5>
-                    <p className="text-xs text-slate-500 dark:text-slate-400">{test.role}</p>
+                    <h5 className="font-bold text-slate-900 dark:text-white">
+                      {test.name}
+                    </h5>
+                    <p className="text-xs text-slate-500 dark:text-slate-400">
+                      {test.role}
+                    </p>
                   </div>
                 </div>
               </div>

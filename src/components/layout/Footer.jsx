@@ -64,7 +64,7 @@ const USEFUL_LINKS = [
 
 const ACCOUNT_LINKS = [
   { label: 'Login', href: '/login' },
-  { label: 'Register', href: '/signup' },
+  { label: 'Register', href: '/register' },
   { label: 'My Bookings', href: '/my-bookings' },
   { label: 'My Listings', href: '/my-listings' },
 ];

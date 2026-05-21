@@ -45,7 +45,7 @@ const RoomCard = ({ allRooms }) => {
             <div className="flex justify-between items-center mb-6 mt-auto pt-4 border-t border-slate-50 dark:border-slate-800/60">
               <p className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider">Max Capacity: <span className="text-[#1e1108] dark:text-white font-black">{room?.capacity}</span></p>
               <p className="text-lg font-black text-[#b5622a]">
-                ${room?.hourlyRate}/hr
+                ${room?.hourlyRate}
               </p>
             </div>
 
