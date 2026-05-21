@@ -323,7 +323,7 @@ export default function Navbar() {
                     <Button
                       size="md"
                       color="danger"
-                      className="w-full font-bold bg-red-50 dark:bg-red-955/20 text-red-655 dark:text-red-400 border border-red-100 dark:border-red-900/30 hover:bg-red-100 dark:hover:bg-red-900/30"
+                      className="w-full font-bold bg-red-50 dark:bg-red-950/20 text-red-600 dark:text-red-400 border border-red-100 dark:border-red-900/30 hover:bg-red-100 dark:hover:bg-red-900/30"
                       onPress={() => {
                         handleLogout();
                         setIsOpen(false);
