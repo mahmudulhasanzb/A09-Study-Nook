@@ -9,6 +9,7 @@ export const auth = betterAuth({
   database: mongodbAdapter(db, {
     client,
   }),
+  baseURL: process.env.BETTER_AUTH_URL || process.env.NEXT_PUBLIC_BETTER_AUTH_URL,
   emailAndPassword: {
     enabled: true,
   },
@@ -20,6 +21,8 @@ export const auth = betterAuth({
   },
   trustedOrigins: [
     process.env.BETTER_AUTH_URL,
+    process.env.NEXT_PUBLIC_BETTER_AUTH_URL,
     process.env.NEXT_PUBLIC_API_URL,
+    'https://studyy-nook.vercel.app',
   ].filter(Boolean),
 });
