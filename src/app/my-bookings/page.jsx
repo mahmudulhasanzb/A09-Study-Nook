@@ -2,7 +2,7 @@ import MyBookingsTable from '@/components/MyBookingsTable'
 import React from 'react'
 
 export const metadata = {
-  title: "StudyNook | My Bookings",
+  title: "StudyNook – My Bookings",
   description: "View and manage study rooms you have booked on StudyNook.",
 };
 

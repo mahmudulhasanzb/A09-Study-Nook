@@ -13,7 +13,7 @@ const RegisterPage = () => {
   const [errorMsg, setErrorMsg] = React.useState('');
 
   useEffect(() => {
-    document.title = 'StudyNook | Create Account';
+    document.title = 'StudyNook – Register';
   }, []);
 
   const handleSubmit = async e => {

@@ -1,6 +1,10 @@
 import Link from 'next/link';
 import { Home, Search, Compass } from 'lucide-react';
 
+export const metadata = {
+  title: 'StudyNook – Page Not Found',
+};
+
 export default function NotFound() {
   return (
     <div className="min-h-[80vh] flex flex-col items-center justify-center px-4 md:px-6 bg-white relative overflow-hidden">

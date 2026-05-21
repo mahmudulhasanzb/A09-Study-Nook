@@ -8,6 +8,14 @@ import Link from 'next/link';
 import React from 'react';
 import { auth } from '@/lib/auth';
 
+export async function generateMetadata({ params }) {
+  const { roomId } = await params;
+  const room = await getRoomById(roomId);
+  return {
+    title: room ? `StudyNook – ${room.name}` : 'StudyNook – Room Details',
+  };
+}
+
 const formatDate = dateStr => {
   if (!dateStr) return '';
   try {

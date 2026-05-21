@@ -21,6 +21,7 @@ import Link from 'next/link';
 import { Button } from '@heroui/react';
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
+import { useAuth } from '@/lib/AuthContext';
 
 const AMENITIES_OPTIONS = [
   { label: 'Wi‑Fi', icon: Wifi },
@@ -33,9 +34,16 @@ const AMENITIES_OPTIONS = [
 
 const AddRoomPage = () => {
   const router = useRouter();
+  const { user, loading: authLoading } = useAuth();
 
   useEffect(() => {
-    document.title = 'StudyNook | List a Study Room';
+    if (!authLoading && !user) {
+      router.push('/login');
+    }
+  }, [user, authLoading, router]);
+
+  useEffect(() => {
+    document.title = 'StudyNook – Add Room';
   }, []);
 
   // Local state for image preview and amenities

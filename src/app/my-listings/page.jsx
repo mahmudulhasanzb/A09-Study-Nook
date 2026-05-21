@@ -5,8 +5,19 @@ import Image from 'next/image';
 import Link from 'next/link';
 import toast from 'react-hot-toast';
 import { Plus, Edit2, Trash2, X, AlertTriangle, Layers, Users, DollarSign } from 'lucide-react';
+import { useAuth } from '@/lib/AuthContext';
+import { useRouter } from 'next/navigation';
 
 const MyListingsPage = () => {
+  const { user, loading: authLoading } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!authLoading && !user) {
+      router.push('/login');
+    }
+  }, [user, authLoading, router]);
+
   const [rooms, setRooms] = useState([]);
   const [loading, setLoading] = useState(true);
   const [editingRoom, setEditingRoom] = useState(null);
@@ -45,7 +56,7 @@ const MyListingsPage = () => {
   };
 
   useEffect(() => {
-    document.title = 'StudyNook | My Hosted Listings';
+    document.title = 'StudyNook – My Listings';
     fetchMyRooms();
   }, []);
 

@@ -4,6 +4,10 @@ import coverImg from '@/assets/study-nook-cover.png';
 import FeaturedRooms from '@/components/FeaturedRooms';
 import { ArrowRight, BookOpen, Star, Users } from 'lucide-react';
 
+export const metadata = {
+  title: 'StudyNook – Home',
+};
+
 export default async function Home() {
   return (
     <>

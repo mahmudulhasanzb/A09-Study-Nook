@@ -12,7 +12,7 @@ const LoginPage = () => {
   const { login, googleLogin } = useAuth();
 
   useEffect(() => {
-    document.title = 'StudyNook | Sign In';
+    document.title = 'StudyNook – Login';
   }, []);
 
   const handleSubmit = async e => {

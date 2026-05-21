@@ -6,6 +6,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
+export const metadata = {
+  title: 'StudyNook – Available Rooms',
+};
+
 const AllRoomsPage = async ({ searchParams }) => {
   const params = await searchParams;
   const allRooms = await getAllRooms(params);
