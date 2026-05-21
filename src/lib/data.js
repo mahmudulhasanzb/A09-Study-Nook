@@ -1,7 +1,7 @@
 export const getFeaturedRooms = async () => {
   try {
     const apiBase = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
-    const res = await fetch(`${apiBase}/featured`);
+    const res = await fetch(`${apiBase}/featured`, { cache: 'no-store' });
     if (!res.ok) {
       console.warn(`Failed to fetch featured rooms: ${res.statusText}`);
       return [];
@@ -40,7 +40,7 @@ export const getAllRooms = async (queryParams = {}) => {
 export const getRoomById = async roomId => {
   try {
     const apiBase = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
-    const res = await fetch(`${apiBase}/rooms/${roomId}`);
+    const res = await fetch(`${apiBase}/rooms/${roomId}`, { cache: 'no-store' });
     if (!res.ok) {
       console.warn(`Failed to fetch room ${roomId}: ${res.statusText}`);
       return null;
