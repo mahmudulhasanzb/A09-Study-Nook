@@ -138,7 +138,7 @@ const BookingModal = ({ room, currentUser }) => {
         }`}
       >
         <Calendar className="w-5 h-5" />
-        {isOwner ? 'Your Listing' : 'Book Now'}
+        {isOwner ? 'Your Listing' : !currentUser ? 'Login to Book' : 'Book Now'}
       </button>
 
       {isOpen && (
