@@ -27,7 +27,7 @@ const DeleteModal = () => {
               <Button slot="close" variant="tertiary">
                 Cancel
               </Button>
-              <Button onClick={toast.success('Room deleted successfully')} slot="close" variant="danger">
+              <Button onClick={() => toast.success('Room deleted successfully')} slot="close" variant="danger">
                 Delete Room
               </Button>
             </AlertDialog.Footer>

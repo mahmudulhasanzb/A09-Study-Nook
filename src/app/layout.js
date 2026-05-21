@@ -35,7 +35,40 @@ export default function RootLayout({ children }) {
               {children}
             </main>
             <Footer/>
-            <Toaster position="top-center" reverseOrder={false} />
+            <Toaster
+              position="top-right"
+              reverseOrder={false}
+              toastOptions={{
+                style: {
+                  borderRadius: '1.25rem',
+                  padding: '1rem 1.25rem',
+                  fontSize: '0.875rem',
+                  fontWeight: '600',
+                  boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+                  background: 'var(--toast-bg, #ffffff)',
+                  color: 'var(--toast-color, #1e293b)',
+                  border: '1px solid var(--toast-border, #f1f5f9)',
+                },
+                success: {
+                  style: {
+                    borderLeft: '5px solid #b5622a',
+                  },
+                  iconTheme: {
+                    primary: '#b5622a',
+                    secondary: '#ffffff',
+                  },
+                },
+                error: {
+                  style: {
+                    borderLeft: '5px solid #ef4444',
+                  },
+                  iconTheme: {
+                    primary: '#ef4444',
+                    secondary: '#ffffff',
+                  },
+                },
+              }}
+            />
           </ThemeProvider>
         </AuthProvider>
       </body>

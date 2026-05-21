@@ -63,7 +63,7 @@ const EditModal = () => {
                     </div>
                   )) */}
 
-                  <Button onClick={toast.success('Room edited successfully')} slot="close">Save Change</Button>
+                  <Button onClick={() => toast.success('Room edited successfully')} slot="close">Save Change</Button>
                 </form>
               </Surface>
             </Modal.Body>

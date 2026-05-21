@@ -1,2 +1,14 @@
 @import "tailwindcss";
 @import "@heroui/styles"; 
+
+:root {
+  --toast-bg: #ffffff;
+  --toast-color: #0f172a;
+  --toast-border: #f1f5f9;
+}
+
+.dark {
+  --toast-bg: #0f172a;
+  --toast-color: #f8fafc;
+  --toast-border: #1e293b;
+}
