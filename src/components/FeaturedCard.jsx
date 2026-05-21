@@ -40,7 +40,7 @@ const FeaturedCard = ({ featuredRooms }) => {
 
         <div className="flex justify-between items-center mb-4 mt-auto">
           <p className="text-sm text-slate-500 dark:text-slate-400 font-bold">{room?.capacity} Capacity</p>
-          <p className="text-lg font-black text-[#b5622a]">${room?.hourlyRate}/hr</p>
+          <p className="text-lg font-black text-[#b5622a]">${room?.hourlyRate}</p>
         </div>
 
         <Link href={`/rooms/${room._id}`} className="w-full block">
