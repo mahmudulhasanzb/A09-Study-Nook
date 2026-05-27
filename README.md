@@ -14,7 +14,7 @@ Study Nook is a modern study room and workspace booking platform designed to con
 
 ## Tech Stack
 
-- **Frontend**: Next.js (App Router), React, Tailwind CSS, HeroUI, Lucide React
+- **Frontend**: Next.js (App Router), React, Tailwind CSS, HeroUI, Lucide React.
 - **Backend**: Node.js, Express, MongoDB Atlas, JWT/Better-Auth
 
 ## Getting Started
