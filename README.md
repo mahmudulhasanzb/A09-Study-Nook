@@ -2,7 +2,7 @@
 
 Study Nook is a modern study room and workspace booking platform designed to connect students and professionals with productive environments. Whether you need a quiet nook for solo studying or a fully-equipped room for group projects, Study Nook makes finding and booking spaces effortless.
 
-**Live Site:** [https://studyy-nook.vercel.app/]()
+**Live Site:** [https://studyy-nook.vercel.app/](https://studyy-nook.vercel.app/)
 
 ## Key Features
 
